@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Display and Cart</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #2d2d2d; /* Black background */
+      color: #fff; /* White text */
+    }
+
+    header {
+      background-color: #ff7f50; /* Orange header background */
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    #product-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      padding: 20px;
+    }
+    #product-container1 {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      padding: 20px;
+    }
+    #product-container2 {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      padding: 20px;
+    }
+    #product-container3 {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      padding: 20px;
+    }
+    .product-container{
+      margin-left: 6rem;
+      margin-top: 2rem;
+      display: inline-block;
+      /* flex-direction: row; */
+      /* justify-content: space-between; */
+      align-items: center;
+      margin-bottom: 20px;
+      margin-right: 0rem;
+    }
+
+    .product-card {
+      background-color: #333; /* Dark gray background */
+      border: 1px solid #6b6b6b; /* Slightly darker border */
+      padding: 13px;
+      margin: 20px;
+      width: 200px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.4); /* Slightly darker shadow */
+      border-radius: 10%;
+    }
+
+    .product-card h3 {
+      color: #ff7f50; /* Orange heading color */
+    }
+
+    .product-card button {
+      background-color: #ff7f50; /* Orange button background */
+      color: #fff; /* White text */
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 15%;
+    }
+    .product-card button:hover {
+      background-color: #4f4c4c; /* Orange button background */
+    }
+
+    .cart {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 20px;
+      background-color: #4f4c4c;
+      color: #fff;
+      cursor: pointer;
+      border-radius: 20%;
+      z-index: 9999;
+    }
+
+    #cart-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+      color: #fff;
+      padding: 20px;
+      box-sizing: border-box;
+      overflow: auto;
+    }
+
+    .modal-content {
+      background-color: #2d2d2d; /* Dark gray modal background */
+      margin: auto;
+      padding: 20px;
+      width: 80%;
+      max-width: 600px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.6); /* Slightly darker modal shadow */
+    }
+
+    .modal-content h2 {
+      color: #ff7f50; /* Orange heading color */
+    }
+
+    .modal-content button {
+      background-color: #ff7f50; /* Orange button background */
+      color: #fff; /* White text */
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 20%;
+      margin-left: 10px;
+    }
+    .modal-content button:hover {
+      background-color: #4f4c4c;
+    }
+
+    #feedbackForm {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    #feedbackForm label {
+      margin-bottom: 5px;
+      color: #ff7f50;
+    }
+
+    #feedbackMessage {
+      resize: vertical;
+      margin-bottom: 10px;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+
+    #feedbackForm button {
+      background-color: #ff7f50;
+      color: #fff;
+      border: none;
+      padding: 8px;
+      cursor: pointer;
+      display: none;
+    }
+
+    #feedbackForm button:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Product Display and Cart</h1>
+</header>
+
+<div>
+  <h2 style="margin-left: 30px;">Makeup</h2>
+  <div class="product-container">
+    <img src="http://localhost:5000/uploads/myImage-1713277774016.avif" alt="Sample Image 1" width="120">
+    <div class="product-info">
+      <h3>Faces Canada Ultime Pro Makeup Fixer (50 ml)</h3>
+      <p>Rs.331</p>
+    </div>
+  </div>
+  <div class="product-container">
+    <img src="http://localhost:5000/uploads/myImage-1713280891520" alt="Sample Image 1" width="120">
+    <div class="product-info">
+      <h3> Profusion Cosmetics Profusion Cosmetics Mini Artistry 6 Shade Blush - 1 (16g)</h3>
+      <p>Rs.1050</p>
+    </div>
+  </div>
+  <div class="product-container">
+    <img src="http://localhost:5000/uploads/myImage-1713280896709" alt="Sample Image 1" width="120">
+    <div class="product-info">
+      <h3>Charmacy Milano Matte Foundation - 02 (30ml)</h3>
+      <p>Rs.1066</p>
+    </div>
+  </div>
+  
+  
+  <div class="product-container">
+    <img src="http://localhost:5000/uploads/myImage-1713280902337" alt="Sample Image 2" width="120">
+    <div class="product-info">
+      <h3>Laura Mercier Translucent Loose Setting Powder - Translucent (30g)</h3>
+      <p>Rs.4300</p>
+    </div>
+  </div>
+  </div>
+<div id="product-container1"></div>
+<div>
+  <h2 style="margin-left: 30px;">Skincare</h2>
+  <div class="product-container">
+    <img src="http://localhost:5000/uploads/myImage-1713280907242" alt="Sample Image 1" width="140">
+    <div class="product-info">
+      <h3>Cetaphil Gentle Skin Cleanser (125ml)</h3>
+      <p>Rs.375</p>
+    </div>
+  </div>
+  <div class="product-container">
+    <img src="http://localhost:5000/uploads/myImage-1713280917542" alt="Sample Image 1" width="140">
+    <div class="product-info">
+      <h3>Plum 10% Niacinamide Brightening Face Serum, Rice Water & Ferment-Fades Blemishes & Acne Mark (30ml)</h3>
+      <p>Rs.584</p>
+    </div>
+  </div>
+  <div class="product-container">
+    <img src="http://localhost:5000/uploads/myImage-1713280923347" alt="Sample Image 1" width="160">
+    <div class="product-info">
+      <h3>Minimalist SPF 50 PA ++++ Sunscreen With Multi-Vitamin For Reducing Photoaging & No White Cast (50g)</h3>
+      <p>Rs.399</p>
+    </div>
+  </div>
+
+  <div class="product-container">
+    <img src="http://localhost:5000/uploads/myImage-1713280936756" alt="Sample Image 1" width="160">
+    <div class="product-info">
+      <h3>ClayCo Rice and Sake Sleep Mask (50ml)</h3>
+      <p>Rs.1099</p>
+    </div>
+  </div>
+</div>
+
+<div id="product-container2"></div>
+<div>
+  <h2 style="margin-left: 30px;">Hair</h2>
+  <div class="product-container">
+    <img src="http://localhost:5000/uploads/myImage-1713280946799" alt="Sample Image 1" width="140">
+    <div class="product-info">
+      <h3>L'Oreal Professionnel Serie Expert Absolut Repair Shampoo (300ml)</h3>
+      <p>Rs.700</p>
+    </div>
+  </div>
+  <div class="product-container">
+    <img src="http://localhost:5000/uploads/myImage-1713280957294" alt="Sample Image 1" width="140">
+    <div class="product-info">
+      <h3>WishCare Hair Growth Serum Concentrate (30ml)</h3>
+      <p>Rs.699</p>
+    </div>
+  </div>
+  <div class="product-container">
+    <img src="http://localhost:5000/uploads/myImage-1713280962348" alt="Sample Image 1" width="160">
+    <div class="product-info">
+      <h3>Mamaearth Rosemary Hair Growth Oil With Rosemary & Methi Dana (150ml)</h3>
+      <p>Rs.377</p>
+    </div>
+  </div>
+  <div class="product-container">
+    <img src="http://localhost:5000/uploads/myImage-1713280968642" alt="Sample Image 2" width="160">
+    <div class="product-info">
+      <h3>Schwarzkopf Root Retouch Instant Temporary Hair Spray - Brown (120ml)</h3>
+      <p>Rs.424</p>
+    </div>
+  </div>
+  
+</div>
+
+<div id="product-container3"></div>
+<div>
+  <h2 style="margin-left: 30px;">Fragrances</h2>
+  <div class="product-container">
+    <img src="http://localhost:5000/uploads/myImage-1713280962348" alt="Sample Image 1" width="140">
+    <div class="product-info">
+      <h3>RENEE Bloom Eau De Parfum (50ml)</h3>
+      <p>Rs.497</p>
+    </div>
+  </div>
+  <div class="product-container">
+    <img src="http://localhost:5000/uploads/myImage-1713280978966" alt="Sample Image 1" width="140">
+    <div class="product-info">
+      <h3>Nivea Women Pearl & Beauty Deodorant Roll On 48H Protection (50ml)</h3>
+      <p>Rs.164</p>
+    </div>
+  </div>
+  <div class="product-container">
+    <img src="http://localhost:5000/uploads/myImage-1713280984543" alt="Sample Image 1" width="160">
+    <div class="product-info">
+      <h3>Estee Lauder Pleasures Eau De Parfum - (100ml)</h3>
+      <p>Rs.700</p>
+    </div>
+  </div>
+  <div class="product-container">
+    <img src="http://localhost:5000/uploads/myImage-1713280989004" alt="Sample Image 2" width="160">
+    <div class="product-info">
+      <h3>Layer'r Wottagirl! Vanilla Twist Body Splash (150ml)</h3>
+      <p>Rs.233</p>
+    </div>
+  </div>
+  
+</div>
+
+<div class="cart" onclick="toggleCart()">
+  Cart <span id="cart-count">0</span>
+</div>
+
+<div id="cart-modal" onclick="toggleCart()">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <h2>Your Cart</h2>
+    <ul id="cart-items"></ul>
+    <p id="total-cart-price"></p>
+    <p id="gst-amount"></p>
+    <p id="total-amount-with-gst"></p>
+    <!-- <h3>Feedback</h3>
+    <form id="feedbackForm">
+      <label for="feedbackMessage">Feedback Message:</label>
+      <textarea id="feedbackMessage" name="feedbackMessage" rows="4" required></textarea>
+      <button onclick="submitFeedback(event);completePurchase();">Checkout</button>
+    </form> -->
+    <button id="redirectToPaymentBtn">Proceed to Payment</button>
+  </div>
+
+</div>
+
+<script>
+    const cart = [];
+  let products = [];
+
+  // Fetch products from API
+  async function fetchProducts() {
+    try {
+      const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTllODFjMmMxM2FiMGUxOWQ5N2Y2MzYiLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE3MDQ5MDExNDUsImV4cCI6MTcwNDk4NzU0NX0.wIKoBEOfHD-wiHWQvXexmjcWiUCOveW5J9-OgXWYMiI'; // Replace with your actual Bearer token
+      const response = await fetch('http://localhost:5000/admin/all-products', {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('adminToken')}`,
+        },
+      });
+      const data = await response.json();
+      products = data.products;
+      return data.products;
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      return [];
+    }
+  }
+
+  // Mock data for cart and product display
+
+  // Function to display products
+  // async function displayProducts() {
+  //   const productContainer = document.getElementById('product-container');
+  //   products = await fetchProducts();
+
+  //   productContainer.innerHTML = '';
+  //   products.forEach(product => {
+  //     const productCard = document.createElement('div');
+  //     productCard.classList.add('product-card');
+  //     productCard.innerHTML = `
+  //       <h3>${product.name}</h3>
+  //       <p>Group: ${product.group}</p>
+  //       <p>Colour: ${product.colour}</p>
+  //       <p>${product.details}</p>
+  //       <p>$ ${product.price}</p>
+  //       <button onclick="addToCart('${product._id}')">Add to Cart</button>
+  //     `;
+  //     productContainer.appendChild(productCard);
+  //   });
+  // }
+
+  // Function to display products with pagination
+async function displayProducts1(pageNumber, pageSize) {
+    const productContainer = document.getElementById('product-container1');
+    productContainer.innerHTML = '';
+    
+    const startIndex = (pageNumber - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    
+    const products = await fetchProducts();
+    const paginatedProducts = products.slice(startIndex, endIndex);
+    
+    paginatedProducts.forEach(product => {
+        const productCard = createProductCard(product);
+        productContainer.appendChild(productCard);
+    });
+}
+
+async function displayProducts2(pageNumber, pageSize) {
+    const productContainer = document.getElementById('product-container2');
+    productContainer.innerHTML = '';
+    
+    const startIndex = (pageNumber - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    
+    const products = await fetchProducts();
+    const paginatedProducts = products.slice(startIndex, endIndex);
+    
+    paginatedProducts.forEach(product => {
+        const productCard = createProductCard(product);
+        productContainer.appendChild(productCard);
+    });
+}
+
+async function displayProducts3(pageNumber, pageSize) {
+    const productContainer = document.getElementById('product-container3');
+    productContainer.innerHTML = '';
+    
+    const startIndex = (pageNumber - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    
+    const products = await fetchProducts();
+    const paginatedProducts = products.slice(startIndex, endIndex);
+    
+    paginatedProducts.forEach(product => {
+        const productCard = createProductCard(product);
+        productContainer.appendChild(productCard);
+    });
+}
+
+// Function to create a product card
+function createProductCard(product) {
+    const productCard = document.createElement('div');
+    productCard.classList.add('product-card');
+    productCard.innerHTML = `
+        <h3>${product.name}</h3>
+        <p>Group: ${product.group}</p>
+        <p>Colour: ${product.colour}</p>
+        <p>${product.details}</p>
+        <p>$ ${product.price}</p>
+        <button onclick="addToCart('${product._id}')">Add to Cart</button>
+    `;
+    return productCard;
+}
+
+// // Function to fetch products from the server
+// async function fetchProducts() {
+//     // Code to fetch products from the server goes here
+//     // You can replace this with your actual fetching logic
+//     return new Promise((resolve, reject) => {
+//         // Example data
+//         const products = [
+//             // Insert your product objects here
+//         ];
+//         resolve(products);
+//     });
+// }
+
+
+
+  // Function to add a product to the cart
+  function addToCart(productId) {
+    const product = products.find(p => p._id === productId);
+    if (product) {
+      const existingCartItem = cart.find(item => item.productId === productId);
+      if (existingCartItem) {
+        existingCartItem.quantity++;
+      } else {
+        cart.push({ productId, quantity: 1 });
+      }
+      updateCartCount();
+    }
+  }
+
+// Function to remove a product from the cart
+function removeFromCart(productId) {
+  const existingCartItemIndex = cart.findIndex(item => item.productId === productId);
+  if (existingCartItemIndex !== -1) {
+    const existingCartItem = cart[existingCartItemIndex];
+    if (existingCartItem.quantity > 1) {
+      existingCartItem.quantity--;
+    } else {
+      cart.splice(existingCartItemIndex, 1);
+    }
+    updateCartCount();
+    displayCartItems(); // Update the cart display
+  }
+}
+
+
+  // Function to update the cart count in the UI
+  function updateCartCount() {
+    const cartCount = document.getElementById('cart-count');
+    cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+  }
+
+  // Function to toggle the cart modal
+  function toggleCart() {
+    const cartModal = document.getElementById('cart-modal');
+
+    if (cart.length === 0) {
+    alert("Your cart is empty. Please add items to your cart first.");
+    return;
+    }
+    cartModal.style.display = cartModal.style.display === 'none' ? 'block' : 'none';
+    displayCartItems();
+  }
+
+  // Function to display items in the cart
+function displayCartItems() {
+  const cartItemsList = document.getElementById('cart-items');
+  cartItemsList.innerHTML = '';
+
+  let totalCartPrice = 0;
+
+  cart.forEach(item => {
+    const product = products.find(p => p._id === item.productId);
+    if (product) {
+      const cartItem = document.createElement('li');
+      const individualPrice = item.quantity * product.price;
+      totalCartPrice += individualPrice;
+
+      cartItem.textContent = `${product.name} - Quantity: ${item.quantity} - Individual Price: $${individualPrice.toFixed(2)}`;
+      // Add a remove button for each item
+      const removeButton = document.createElement('button');
+      removeButton.textContent = 'Remove';
+      removeButton.onclick = () => removeFromCart(item.productId);
+      cartItem.appendChild(removeButton);
+
+      cartItemsList.appendChild(cartItem);
+    }
+  });
+
+  // Display the total cart price
+  const GST = totalCartPrice * 0.18;
+  const totalAmountWithGST = totalCartPrice + GST;
+
+  // Display the total cart price with GST
+  const totalCartPriceElement = document.getElementById('total-cart-price');
+  totalCartPriceElement.textContent = `Total Cart Price (excl. GST): $${totalCartPrice.toFixed(2)}`;
+  
+  const GSTElement = document.getElementById('gst-amount');
+  GSTElement.textContent = `GST (18%): $${GST.toFixed(2)}`;
+
+  const totalAmountWithGSTElement = document.getElementById('total-amount-with-gst');
+  totalAmountWithGSTElement.textContent = `Total Amount (incl. GST): $${totalAmountWithGST.toFixed(2)}`;
+}
+
+
+  // Function to complete the purchase and display a notification
+  function completePurchase() {
+    alert('Final purchase done! Thank you for shopping with us!');
+    // You can add additional logic here, such as clearing the cart and updating the UI.
+    cart.length = 0; // Clear the cart
+    toggleCart(); // Close the cart modal
+    updateCartCount(); // Update the cart count in the UI
+  }
+  // Function to handle button click and redirect to payment page
+document.getElementById('redirectToPaymentBtn').addEventListener('click', function() {
+  window.location.href = 'address.html';
+});
+
+
+  // Function to submit feedback
+  async function submitFeedback(event) {
+    event.preventDefault();
+
+    const feedbackForm = document.getElementById('feedbackForm');
+    const feedbackMessage = feedbackForm.elements.feedbackMessage.value;
+
+    try {
+      const response = await fetch('http://localhost:5000/user/submit-feedback', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('userToken')}`, // Replace with your actual access token
+        },
+        body: JSON.stringify({ message: feedbackMessage }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        alert('Feedback submitted successfully!');
+        console.log(data.feedback); // Log the saved feedback details
+        feedbackForm.reset(); // Clear the feedback form
+      } else {
+        const errorData = await response.json();
+        alert(`Error: ${errorData.error}`);
+      }
+    } catch (error) {
+      console.error('Error submitting feedback:', error);
+      alert('An error occurred while submitting feedback. Please try again later.');
+    }
+  }
+
+  // Initialize the product display
+  displayProducts1(1,5);
+  displayProducts2(1,5);
+  displayProducts3(1,5);
+</script>
+
+</body>
+</html>
